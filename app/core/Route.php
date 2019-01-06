@@ -35,4 +35,12 @@ class Route
              $controller->index();
          }
     }
+
+    public static function redirect( $request = '')
+    {
+        $host  = $_SERVER['HTTP_HOST'];
+        $uri   = rtrim(dirname($_SERVER['PHP_SELF']), '/\\');
+        header("Location: http://$host$uri$request");
+        exit;
+    }
 }

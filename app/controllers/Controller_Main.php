@@ -1,19 +1,21 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: pTawKa
- * Date: 27.12.2018
- * Time: 20:27
- */
+
 
 namespace App\Controllers;
 
 use App\Core\Controller;
+use app\models\Product;
 
 class Controller_Main extends Controller
 {
     public function index()
     {
-        $this->view->render('main_view.php', 'template_view.php', ['test' => '123']);
+        session_start();
+        $products = new Product();
+        $data['products'] = $products->getAll();
+        if($_SESSION['auth'] === TRUE){
+            $this->view->render('main_auth_view.php', 'template_view.php', $data);
+        }else $this->view->render('main_no_auth_view.php', 'template_view.php', $data);
+        session_write_close();
     }
 }

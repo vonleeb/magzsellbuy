@@ -8,6 +8,6 @@ class Controller_404 extends Controller
 {
     public function index()
     {
-        $this->view->render('error_404.php', 'template_view.php');
+        $this->view->render('error_404_view.php', 'template_view.php');
     }
 }

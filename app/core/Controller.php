@@ -18,7 +18,10 @@ class Controller
         $this->view = new View();
     }
 
-    public function action_index()
+    public function index()
     {
+        session_start();
+        $this->view->render('error_404_view.php', 'template_view.php');
+        session_write_close();
     }
 }

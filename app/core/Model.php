@@ -10,15 +10,26 @@ namespace App\Core;
 
 class Model
 {
-    private $mysqli;
+    public $errors = array();
+    protected $mysqli;
 
     public function __construct()
     {
-        require_once '../../config/config.php';
+        require_once PATH . '/config/config.php';
         $this->mysqli = new \mysqli($config['host'], $config['username'], $config['password'], $config['dbname']);
         if ($this->mysqli->connect_error) {
             die('Ошибка соединения с БД');
         }
         $this->mysqli->set_charset("utf8");
+    }
+
+    protected function clean($value = "")
+    {
+        $value = trim($value);
+        $value = stripslashes($value);
+        $value = strip_tags($value);
+        $value = htmlspecialchars($value);
+
+        return $value;
     }
 }
