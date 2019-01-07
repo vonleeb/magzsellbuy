@@ -1,10 +1,10 @@
 <div class="auth_msg">
     <div class="row">
         <div class="col-md-7">
-            <?php if ($_SESSION['auth'] === TRUE) : ?>
+            <?php if (isset($_SESSION['auth']) and $_SESSION['auth'] === TRUE) : ?>
                 <div class="row">
                     <div class="col-md-12">
-                        <p class="text-success">Вы авторизованы, как <?= $_SESSION['name'] ?>! </p>
+                        <p class="text-success">Вы авторизованы, как <?=$_SESSION['name'] ?>! </p>
                     </div>
                 </div>
                 <div class="row">
@@ -29,13 +29,19 @@
 
         <div class="col-md-5">
             <p class="text-info">
-            <?php if(is_array($msg)) {
+            <?php
+            if(isset($_SESSION['msg'])) {
+                $msg = $_SESSION['msg'];
+                unset($_SESSION['msg']);
+            }
+            if(isset($msg)){
+            if(is_array($msg)) {
                 foreach ($msg as $m)
                     echo $m . '<br>';
             }else{
                 echo $msg;
             }
-
+            }
             ?>
             </p>
         </div>

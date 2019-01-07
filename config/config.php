@@ -1,7 +1,7 @@
 <?php
 $config = [
-    'host' => 'localhost',
-    'username' => 'root',
-    'password' => '',
+    'host' => 'phpmyadmin',
+    'username' => 'test',
+    'password' => '123',
     'dbname' => 'shop'
 ];

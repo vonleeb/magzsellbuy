@@ -4,18 +4,22 @@
 namespace App\Controllers;
 
 use App\Core\Controller;
-use app\models\Product;
+use App\Models\Product;
 
 class Controller_Main extends Controller
 {
     public function index()
     {
         session_start();
+        if(isset($_SESSION['msg'])) {
+            $data['msg'] = $_SESSION['msg'];
+            unset($_SESSION['msg']);
+        }
         $products = new Product();
-        $data['products'] = $products->getAll();
-        if($_SESSION['auth'] === TRUE){
-            $this->view->render('main_auth_view.php', 'template_view.php', $data);
-        }else $this->view->render('main_no_auth_view.php', 'template_view.php', $data);
+        $sort = isset($_GET['sort']) ? $_GET['sort'] : NULL;
+        $data['products'] = $products->getAll(NULL , $sort);
+        $data['sort'] = $sort;
+        $this->view->render('main_view.php', 'template_view.php', $data);
         session_write_close();
     }
 }

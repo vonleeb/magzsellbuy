@@ -47,7 +47,7 @@ class User extends Model
     public function userCreate()
     {
         try {
-            if ($this->SearchUser($this->clean($_POST['email'])) === FALSE) {
+            if ($this->searchUser($this->clean($_POST['email'])) === FALSE) {
                 $sql = "INSERT INTO users(email, password, fio, phone) VALUES (? , ? , ? , ?)";
                 if ($query = $this->mysqli->prepare($sql)) {
                     $query->bind_param('ssss', $this->clean($_POST['email']), md5($this->clean($_POST['password'])), $this->clean($_POST['fio']), $this->clean($_POST['phone']));
@@ -68,7 +68,7 @@ class User extends Model
 
     public function userLogin()
     {
-        $user = $this->SearchUser($_POST['email']);
+        $user = $this->searchUser($_POST['email']);
         if ($user !== FALSE) {
             if ($user['password'] == md5($this->clean($_POST['password']))) {
                 return $user;
@@ -76,7 +76,7 @@ class User extends Model
         } else return false;
     }
 
-    private function SearchUser($userName)
+    private function searchUser( $userName)
     {
         $sql = "SELECT * FROM users WHERE email = ?";
         if ($query = $this->mysqli->prepare($sql)) {

@@ -1,6 +1,9 @@
 .header, .content, .footer, .auth_msg, .auth, .auth_title, .product{
     margin-top: 20px;
 }
+.product_option, .seller_option{
+    font-weight: bold;
+}
 /*#footer {*/
     /*position: absolute;*/
     /*bottom: 0;*/

@@ -23,7 +23,7 @@ class Model
         $this->mysqli->set_charset("utf8");
     }
 
-    protected function clean($value = "")
+    public function &clean( &$value = "")
     {
         $value = trim($value);
         $value = stripslashes($value);
